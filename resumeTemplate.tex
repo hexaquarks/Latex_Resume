@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage[some]{background}
+\usepackage{lipsum}
+\usepackage[explicit]{titlesec}
+\usepackage{svg}
+\usepackage{tikz}
+\usetikzlibrary{shapes,shadows,calc}
+\usetikzlibrary{positioning,calc}
+
+
+%%% tikz section
+\definecolor{cor1}{HTML}{57C3CF}
+\definecolor{cor2}{HTML}{4EA8B1}
+
+\definecolor{titlepagecolor}{HTML}{100c08}
+\definecolor{lightorange}{HTML}{ffa500}
+
+
+\newcommand\SecTitle[4]{%
+	\begin{tikzpicture}
+	
+	\node (A) at (1,0) {};
+	%\draw (-7.2,0) -- (\textwidth,0);
+	\fill[fill=lightorange] (A.north west) -- ($(A.north west)+(3.5cm,0)$) -- ($(A.north west)+(4.5cm,-0.5)$) -- ($(A.north west)+(3.5cm,-1)$) -- ($(A.north west)+(0,-1)$) -- (A.north west);
+	\node [below=8pt, color=white, anchor=west](B) at (1,0) {\huge\textbf{\textsf{#4}}};
+	
+	\end{tikzpicture}
+}
+\titleformat{name=\section}
+{\normalfont}{}{0em}
+{\SecTitle{east}{west}{0\paperwidth}{#1}}
+
+%%% 
+
+\DeclareFixedFont{\bigsf}{T1}{phv}{b}{n}{1.5cm}
+
+\newcommand{\icon}[2][1.1cm]{\begin{minipage}{#1}\includegraphics[width=#1]{#2}\end{minipage}}
+
+\backgroundsetup{
+	scale=1,
+	angle=0,
+	opacity=1,
+	contents={\begin{tikzpicture}[remember picture,overlay]
+		\path [fill=titlepagecolor] (-0.5\paperwidth,8) rectangle (0.5\paperwidth,20);  
+		\end{tikzpicture}}
+}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\BgThispage
+		\newgeometry{left=1cm,right=1cm}
+		\vspace*{-2cm}
+		\noindent
+			\vspace{2cm}
+		\begin{minipage}{0.5\textwidth}
+			\begin{flushleft}
+					\textcolor{lightorange}{\huge\selectfont\bfseries MIHAIL}
+					\textcolor{white}{\huge\selectfont\bfseries ANGHELICI} \newline
+					\textcolor{white}{\Large\selectfont\bfseries Software Developer }
+			\end{flushleft}
+		\end{minipage}
+		\hfill%
+		\begin{minipage}{0.3\textwidth}
+		\begin{flushright}
+			\large\selectfont
+			\begin{tabular}{ c l }
+				github & \textcolor{white}{\large\selectfont\bfseries gitLink} \\ 
+				site & \textcolor{white}{\large\selectfont\bfseries gitSite}\\  
+				mail & \textcolor{white}{\large\selectfont\bfseries gitMail} \\
+				mobile & \textcolor{white}{\large\selectfont\bfseries gitMobile}\\
+				linkedInt & \textcolor{white}{\large\selectfont\bfseries gitLinkd } 
+			\end{tabular} 
+		\end{flushright}
+	\end{minipage} 
+		\vspace{-1.3cm}
+		\section{Education}
+		\renewcommand{\arraystretch}{3}
+		\begin{minipage}{0.25\linewidth}
+				\begin{tabular}{ r c l }
+				\scalebox{1.2}{$\boldsymbol{2020}$} & \scalebox{1.2}{$\boldsymbol{\xrightarrow{\hspace*{0.6cm}}}$} & \textcolor{black}{\large\selectfont\bfseries Current} \\ 
+				\scalebox{1.2}{$\boldsymbol{2018}$} & \scalebox{1.2}{$\boldsymbol{\xrightarrow{\hspace*{0.4cm}}}$} & \scalebox{1.2}{$\boldsymbol{2020}$}\\
+				\scalebox{1.2}{$\boldsymbol{2015}$} & \scalebox{1.2}{$\boldsymbol{\xrightarrow{\hspace*{0.2cm}}}$} & \scalebox{1.2}{$\boldsymbol{2018}$}
+			\end{tabular} 
+		\end{minipage} {\vline width 1.25pt}
+	\renewcommand{\arraystretch}{1.4}
+		\begin{minipage}{0.7\linewidth}
+			\begin{tabular}{ r p{9.25cm} l }
+				\icon{mcgillPng.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{Major. Physics and Computer Science }\end{tabular} & \normalsize\selectfont \bf{(CGPA \scalebox{1.2}{$\boldmath \sim 3.8$})} \\ 
+				\icon{mcgillPng.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{(Hons.) Physics }\end{tabular} &\\
+				\icon{bdeb_icon.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{College de Bois-de-Boulogne} \\ \large\selectfont \emph{Computer Science and Mathematics}\end{tabular} & \normalsize\selectfont \bf{(R-Score \scalebox{1.2}{$\boldmath \sim 32$})} 
+			\end{tabular}
+		\end{minipage}
+	\end{titlepage}
+	\restoregeometry
+\end{document}
