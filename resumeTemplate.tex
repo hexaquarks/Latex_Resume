@@ -2,13 +2,17 @@
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage[some]{background}
+\usepackage{enumitem} %to set leftmarign locally on enumerate environnmenet
 \usepackage{lipsum}
 \usepackage[explicit]{titlesec}
 \usepackage{svg}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{shapes,shadows,calc}
 \usetikzlibrary{positioning,calc}
+\usetikzlibrary{shapes.geometric}
 
 
 %%% tikz section
@@ -19,32 +23,40 @@
 \definecolor{lightorange}{HTML}{ffa500}
 
 
-\newcommand\SecTitle[4]{%
-	\begin{tikzpicture}
-	
-	\node (A) at (1,0) {};
-	%\draw (-7.2,0) -- (\textwidth,0);
-	\fill[fill=lightorange] (A.north west) -- ($(A.north west)+(3.5cm,0)$) -- ($(A.north west)+(4.5cm,-0.5)$) -- ($(A.north west)+(3.5cm,-1)$) -- ($(A.north west)+(0,-1)$) -- (A.north west);
-	\node [below=8pt, color=white, anchor=west](B) at (1,0) {\huge\textbf{\textsf{#4}}};
-	
+\newcommand*{\MyNode}[1]{%
+	\begin{tikzpicture}[
+	node distance = 2mm,
+	S/.style = {signal, fill=lightorange, 
+		signal to=east,
+		minimum height=3ex,
+		text depth=0.25ex,
+		inner sep=7,
+		font=\sffamily\bfseries}
+	]
+	\node (n1) [S] {\color{white} \huge\textbf{\textsf{#1}}};
+	\draw [line width=0.7mm, black] (n1.east) -- (\textwidth-3cm, 0);
+	%\draw [line width=0.7mm, black] (n1.west) -- (-2cm, 0);
 	\end{tikzpicture}
 }
-\titleformat{name=\section}
+\titleformat{\section}
 {\normalfont}{}{0em}
-{\SecTitle{east}{west}{0\paperwidth}{#1}}
+{\MyNode{#1}}
+%{\SecTitle{east}{west}{0\paperwidth}{#1}}
 
 %%% 
 
 \DeclareFixedFont{\bigsf}{T1}{phv}{b}{n}{1.5cm}
 
 \newcommand{\icon}[2][1.1cm]{\begin{minipage}{#1}\includegraphics[width=#1]{#2}\end{minipage}}
+\newcommand{\iconBdeb}[2][0.9cm]{\begin{minipage}{#1}\hspace{-0.08cm}\includegraphics[width=#1]{#2}\end{minipage}}
+\newcommand{\headerIcon}[2][0.45cm]{\begin{minipage}{#1}\includegraphics[width=#1]{#2}\end{minipage}}
 
 \backgroundsetup{
 	scale=1,
 	angle=0,
 	opacity=1,
 	contents={\begin{tikzpicture}[remember picture,overlay]
-		\path [fill=titlepagecolor] (-0.5\paperwidth,8) rectangle (0.5\paperwidth,20);  
+		\path [fill=titlepagecolor] (-0.5\paperwidth,9) rectangle (0.5\paperwidth,20);  
 		\end{tikzpicture}}
 }
 
@@ -52,11 +64,11 @@
 	
 	\begin{titlepage}
 		\BgThispage
-		\newgeometry{left=1cm,right=1cm}
-		\vspace*{-2cm}
+		\newgeometry{left=1cm,right=1cm, bottom=1cm}
+		\vspace*{-3cm}
 		\noindent
-			\vspace{2cm}
-		\begin{minipage}{0.5\textwidth}
+			\vspace{1.5cm}
+		\begin{minipage}[b]{0.5\textwidth}
 			\begin{flushleft}
 					\textcolor{lightorange}{\huge\selectfont\bfseries MIHAIL}
 					\textcolor{white}{\huge\selectfont\bfseries ANGHELICI} \newline
@@ -67,17 +79,20 @@
 		\begin{minipage}{0.3\textwidth}
 		\begin{flushright}
 			\large\selectfont
+			\renewcommand{\arraystretch}{1.2}
 			\begin{tabular}{ c l }
-				github & \textcolor{white}{\large\selectfont\bfseries gitLink} \\ 
-				site & \textcolor{white}{\large\selectfont\bfseries gitSite}\\  
-				mail & \textcolor{white}{\large\selectfont\bfseries gitMail} \\
-				mobile & \textcolor{white}{\large\selectfont\bfseries gitMobile}\\
-				linkedInt & \textcolor{white}{\large\selectfont\bfseries gitLinkd } 
+				\headerIcon{githubWhite.png} & \textcolor{white}{\large\selectfont\bfseries \href{https://github.com/hexaquarks}{Hexaquarks}} \\ 
+				\headerIcon{linkWhite.png} & \textcolor{white}{\large\selectfont\bfseries \href{https://hexaquarks.github.io/Portofolio/}{Portofolio}}\\  
+				\headerIcon{linkedinWhite.png} &  \textcolor{white}{\large\selectfont\bfseries \href{https://www.linkedin.com/in/mihail-anghelici-85196a20a/}{LinkedIn}}\\
+				\headerIcon{mailWhite.png} & \textcolor{white}{\large\selectfont\bfseries \href{mailto:mihail.anghelici@mail.mcgill.ca}{Email}}\\
+				\headerIcon{phoneWhite.png} & \textcolor{white}{\large\selectfont\bfseries 5149229885 } 
 			\end{tabular} 
 		\end{flushright}
 	\end{minipage} 
 		\vspace{-1.3cm}
-		\section{Education}
+		%\MyNode[rectangle, inner sep=10, outer sep=0, minimum width=1cm, minimum height=1.4cm, fill=red]{(0,0)}{\huge\textbf{\textsf{Education}}}
+		\noindent \section{Education}
+		\vspace{-0.5cm}
 		\renewcommand{\arraystretch}{3}
 		\begin{minipage}{0.25\linewidth}
 				\begin{tabular}{ r c l }
@@ -89,11 +104,80 @@
 	\renewcommand{\arraystretch}{1.4}
 		\begin{minipage}{0.7\linewidth}
 			\begin{tabular}{ r p{9.25cm} l }
-				\icon{mcgillPng.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{Major. Physics and Computer Science }\end{tabular} & \normalsize\selectfont \bf{(CGPA \scalebox{1.2}{$\boldmath \sim 3.8$})} \\ 
-				\icon{mcgillPng.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{(Hons.) Physics }\end{tabular} &\\
-				\icon{bdeb_icon.png} & \begin{tabular}{@{}l@{}}\Large\selectfont \bf{College de Bois-de-Boulogne} \\ \large\selectfont \emph{Computer Science and Mathematics}\end{tabular} & \normalsize\selectfont \bf{(R-Score \scalebox{1.2}{$\boldmath \sim 32$})} 
+				\icon{mcgillPng.png}  
+				& \begin{tabular}{@{}l@{}}
+					\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{Major. Physics and Computer Science 
+				 }\end{tabular} 
+			    & \normalsize\selectfont \bf{(CGPA \scalebox{1.2}{$\boldmath \sim 3.8$})} \\ 
+				\icon{mcgillPng.png} 
+				& \begin{tabular}{@{}l@{}}
+					\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{(Hons.) Physics }
+				\end{tabular} &\\
+				\iconBdeb{bdeb_icon.png} 
+				& \begin{tabular}{@{}l@{}}
+					\Large\selectfont \bf{College de Bois-de-Boulogne} \\ \large\selectfont \emph{Computer Science and Mathematics}
+				\end{tabular} & \normalsize\selectfont \bf{(R-Score \scalebox{1.2}{$\boldmath \sim 32$})} 
 			\end{tabular}
 		\end{minipage}
+	
+		\section{Personal Projects}
+		\vspace{-0.3cm}
+		
+		\begin{minipage}{0.85\linewidth}
+			\begin{tabular}{ p{15.4cm} r}
+				\begin{tabular}[t]{@{}l@{}l@{}l@{}}
+					\huge\selectfont \bf{Particle Geometrical Simulation} \\ \Large\selectfont  \emph{A particle sandbox with main functionalities being arrangement in} \\ \Large\selectfont  \emph{shapes and natural forces modelling.} \\
+					\hspace{0.04\textwidth}\begin{minipage}[t]{0.9\textwidth}
+						\begin{enumerate}
+							\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Physical phenomena modelling} \\  \emph{Gravitational force, electrostatic force, and elastic collisions}
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont \textbf{Dynamic shape arrangement} \\ \emph{Circle, square, diamond, spiral, sunflower spiral, }
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont  \textbf{Shape animations} \\ \emph{Division of a given shape, rotation of shapes with the mouse}
+						\end{enumerate}
+					\end{minipage} 
+					\renewcommand{\arraystretch}{1.5}
+					\begin{tabular}[t]{r}
+						\Large\selectfont \textbf{Technologies} \\ \hline 
+						\Large\selectfont Java   \\ 
+						\Large\selectfont JavaFX \\
+						\Large\selectfont CSS    \\
+						\Large\selectfont Scenebuilder
+					\end{tabular}
+				\end{tabular} 
+			& \headerIcon{githubBlack.png} \ \large\selectfont \textbf{[Source code]}
+			\end{tabular}
+		\end{minipage}
+	
+	\vspace{0.5cm}
+		\hspace{-0.5cm}\begin{minipage}{0.85\linewidth}
+			\begin{tabular}{ p{15.1cm} r}
+				\begin{tabular}[t]{@{}l@{}l@{}l@{}}
+					\huge\selectfont \bf{Weather Application} \\ \Large\selectfont  \emph{A graphical weather application with forecast containers } \\ \Large\selectfont  \emph{and graphs.} \\
+					\hspace{0.04\textwidth}\begin{minipage}[t]{0.9\textwidth}
+						\begin{enumerate}
+							\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Weather forecast} \\  \emph{hourly $(24)$ and daily $(7)$ forecast.}
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont \textbf{Fetched data from an opensource API.} \\ \emph{Used the Fetch API to acquire data}
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont  \textbf{Interactive components and animations} \\ \emph{Carousel containers for daily and hourly forecasts; styled bar charts for daily and hourly forecasts.}
+						\end{enumerate}
+					\end{minipage} 
+						\renewcommand{\arraystretch}{1.7}
+					\begin{tabular}[t]{r}
+						\Large\selectfont \textbf{Technologies} \\ \hline 
+						\Large\selectfont React   \\ 
+						\Large\selectfont Javascript \\
+						\Large\selectfont CSS    \\
+						\Large\selectfont HTML
+					\end{tabular}
+				\end{tabular} 
+					& \renewcommand{\arraystretch}{1.2} \begin{tabular}[t]{ c c }
+						\headerIcon{githubBlack.png}  & \large\selectfont \textbf{[\href{https://github.com/hexaquarks/Particle_Geometry_Simulation}{Source code}]} \\ 
+						\headerIcon{linkBlack.png}  & \large\selectfont \textbf{[\href{https://hexaquarks.github.io/Weather_App/}{Website}]} \\ 
+					\end{tabular}
+			\end{tabular}
+		\end{minipage}
+		\section{Honors \& Awards}
+		\begin{enumerate}[leftmargin=1.8cm]
+				\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Computer Science Excellence Scholarship Award } \\  \emph{By Ministry of Higher Education (April 2021).}
+			\end{enumerate}
 	\end{titlepage}
 	\restoregeometry
 \end{document}
