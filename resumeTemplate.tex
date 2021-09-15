@@ -8,12 +8,11 @@
 \usepackage{lipsum}
 \usepackage[explicit]{titlesec}
 \usepackage{svg}
-\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
 \usepackage{tikz}
 \usetikzlibrary{shapes,shadows,calc}
 \usetikzlibrary{positioning,calc}
 \usetikzlibrary{shapes.geometric}
-
 
 %%% tikz section
 \definecolor{cor1}{HTML}{57C3CF}
@@ -22,6 +21,13 @@
 \definecolor{titlepagecolor}{HTML}{100c08}
 \definecolor{lightorange}{HTML}{ffa500}
 
+\definecolor{hyperrefColor}{HTML}{29b6f6}
+
+\usepackage[colorlinks = true,
+linkcolor = hyperrefColor,
+urlcolor  = hyperrefColor,
+citecolor = hyperrefColor,
+anchorcolor = hyperrefColor]{hyperref}
 
 \newcommand*{\MyNode}[1]{%
 	\begin{tikzpicture}[
@@ -41,6 +47,7 @@
 \titleformat{\section}
 {\normalfont}{}{0em}
 {\MyNode{#1}}
+\titlespacing*{\section}{0pt}{*0}{0.2cm}
 %{\SecTitle{east}{west}{0\paperwidth}{#1}}
 
 %%% 
@@ -56,7 +63,7 @@
 	angle=0,
 	opacity=1,
 	contents={\begin{tikzpicture}[remember picture,overlay]
-		\path [fill=titlepagecolor] (-0.5\paperwidth,9) rectangle (0.5\paperwidth,20);  
+		\path [fill=titlepagecolor] (-0.5\paperwidth,9.75) rectangle (0.5\paperwidth,20);  
 		\end{tikzpicture}}
 }
 
@@ -67,7 +74,7 @@
 		\newgeometry{left=1cm,right=1cm, bottom=1cm}
 		\vspace*{-3cm}
 		\noindent
-			\vspace{1.5cm}
+			\vspace{1.46cm}
 		\begin{minipage}[b]{0.5\textwidth}
 			\begin{flushleft}
 					\textcolor{lightorange}{\huge\selectfont\bfseries MIHAIL}
@@ -89,11 +96,16 @@
 			\end{tabular} 
 		\end{flushright}
 	\end{minipage} 
-		\vspace{-1.3cm}
-		%\MyNode[rectangle, inner sep=10, outer sep=0, minimum width=1cm, minimum height=1.4cm, fill=red]{(0,0)}{\huge\textbf{\textsf{Education}}}
+		\vspace{-1.5cm}
+		\section{Skillset}
+		\begin{enumerate}[leftmargin=2cm]
+			\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \Large\selectfont \textbf{Languages/Frameworks} :  \large\selectfont Java, Javascript, React, Typescript, JavaFX, Python, C, C++, MATLAB, Node.js, OCamel.
+			\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \Large\selectfont  \textbf{Tools/Softwares} : \large\selectfont  Git, Linux (\emph{Ubuntu / WSL}), Scenebuilder, Inkscape, VsCode, GDB.
+			\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \Large\selectfont  \textbf{Markup languages} : \large\selectfont  CSS, SASS, HTML, \LaTeX, Markdown, Neovim.
+		\end{enumerate}
 		\noindent \section{Education}
 		\vspace{-0.5cm}
-		\renewcommand{\arraystretch}{3}
+		\renewcommand{\arraystretch}{2.5}
 		\begin{minipage}{0.25\linewidth}
 				\begin{tabular}{ r c l }
 				\scalebox{1.2}{$\boldsymbol{2020}$} & \scalebox{1.2}{$\boldsymbol{\xrightarrow{\hspace*{0.6cm}}}$} & \textcolor{black}{\large\selectfont\bfseries Current} \\ 
@@ -106,17 +118,17 @@
 			\begin{tabular}{ r p{9.25cm} l }
 				\icon{mcgillPng.png}  
 				& \begin{tabular}{@{}l@{}}
-					\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{Major. Physics and Computer Science 
+					\Large\selectfont \bf{McGill University} \\[-0.1cm] \large\selectfont  \emph{Major. Physics and Computer Science 
 				 }\end{tabular} 
-			    & \normalsize\selectfont \bf{(CGPA \scalebox{1.2}{$\boldmath \sim 3.8$})} \\ 
+			    & \large\selectfont \bf{(CGPA \scalebox{1.2}{$\boldmath \sim 3.8$})} \\ 
 				\icon{mcgillPng.png} 
 				& \begin{tabular}{@{}l@{}}
-					\Large\selectfont \bf{McGill University} \\ \large\selectfont  \emph{(Hons.) Physics }
+					\Large\selectfont \bf{McGill University} \\[-0.1cm] \large\selectfont  \emph{(Hons.) Physics }
 				\end{tabular} &\\
 				\iconBdeb{bdeb_icon.png} 
 				& \begin{tabular}{@{}l@{}}
-					\Large\selectfont \bf{College de Bois-de-Boulogne} \\ \large\selectfont \emph{Computer Science and Mathematics}
-				\end{tabular} & \normalsize\selectfont \bf{(R-Score \scalebox{1.2}{$\boldmath \sim 32$})} 
+					\Large\selectfont \bf{College de Bois-de-Boulogne} \\[-0.1cm] \large\selectfont \emph{Computer Science and Mathematics}
+				\end{tabular} & \large\selectfont \bf{(R-Score \scalebox{1.2}{$\boldmath \sim 32$})} 
 			\end{tabular}
 		\end{minipage}
 	
@@ -124,23 +136,26 @@
 		\vspace{-0.3cm}
 		
 		\begin{minipage}{0.85\linewidth}
-			\begin{tabular}{ p{15.4cm} r}
+			\begin{tabular}{ p{14.95cm} r}
+				\renewcommand{\arraystretch}{0.8}
 				\begin{tabular}[t]{@{}l@{}l@{}l@{}}
-					\huge\selectfont \bf{Particle Geometrical Simulation} \\ \Large\selectfont  \emph{A particle sandbox with main functionalities being arrangement in} \\ \Large\selectfont  \emph{shapes and natural forces modelling.} \\
+					\huge\selectfont \bf{Particle Geometrical Simulation} \\ \large\selectfont  \emph{A particle sandbox with main functionalities being arrangement in} \\ \large\selectfont  \emph{shapes and natural forces modelling.} \\
 					\hspace{0.04\textwidth}\begin{minipage}[t]{0.9\textwidth}
+						\vspace{0.0075cm}
+						\renewcommand{\arraystretch}{1.0}
 						\begin{enumerate}
 							\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Physical phenomena modelling} \\  \emph{Gravitational force, electrostatic force, and elastic collisions}
-							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont \textbf{Dynamic shape arrangement} \\ \emph{Circle, square, diamond, spiral, sunflower spiral, }
-							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont  \textbf{Shape animations} \\ \emph{Division of a given shape, rotation of shapes with the mouse}
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont \textbf{Dynamic shape arrangement and animations} \\[-0.1cm] \emph{Circle, square, diamond, spiral, sunflower spiral ; division of a given shape} \\[-0.1cm]
+							\emph{rotation of shapes with the mouse.}
 						\end{enumerate}
 					\end{minipage} 
-					\renewcommand{\arraystretch}{1.5}
+					\renewcommand{\arraystretch}{1.3}
 					\begin{tabular}[t]{r}
-						\Large\selectfont \textbf{Technologies} \\ \hline 
-						\Large\selectfont Java   \\ 
-						\Large\selectfont JavaFX \\
-						\Large\selectfont CSS    \\
-						\Large\selectfont Scenebuilder
+						\large\selectfont \textbf{Technologies} \\ \hline 
+						\large\selectfont Java   \\ 
+						\large\selectfont JavaFX \\
+						\large\selectfont CSS    \\
+						\large\selectfont Scenebuilder
 					\end{tabular}
 				\end{tabular} 
 			& \headerIcon{githubBlack.png} \ \large\selectfont \textbf{[Source code]}
@@ -149,34 +164,36 @@
 	
 	\vspace{0.5cm}
 		\hspace{-0.5cm}\begin{minipage}{0.85\linewidth}
-			\begin{tabular}{ p{15.1cm} r}
+			\begin{tabular}{ p{14.3cm} r}
+				\renewcommand{\arraystretch}{0.8}
 				\begin{tabular}[t]{@{}l@{}l@{}l@{}}
-					\huge\selectfont \bf{Weather Application} \\ \Large\selectfont  \emph{A graphical weather application with forecast containers } \\ \Large\selectfont  \emph{and graphs.} \\
+					\huge\selectfont \bf{Weather Application} \\ \large\selectfont  \emph{A graphical weather application with forecast containers } \\ \large\selectfont  \emph{and graphs.} \\
 					\hspace{0.04\textwidth}\begin{minipage}[t]{0.9\textwidth}
+						\vspace{0.0075cm}
 						\begin{enumerate}
-							\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Weather forecast} \\  \emph{hourly $(24)$ and daily $(7)$ forecast.}
-							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont \textbf{Fetched data from an opensource API.} \\ \emph{Used the Fetch API to acquire data}
-							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont  \textbf{Interactive components and animations} \\ \emph{Carousel containers for daily and hourly forecasts; styled bar charts for daily and hourly forecasts.}
+							\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Weather forecast} \\  \emph{hourly $(24)$ and daily $(7)$ forecast, with data fetched from an online API}
+							\scriptsize\selectfont 	\item[$\scriptsize\blacksquare$] \large\selectfont  \textbf{Interactive components and animations} \\[-0.1cm] \emph{Carousel containers for daily and hourly forecasts; styled bar charts for daily and hourly forecasts.}
 						\end{enumerate}
 					\end{minipage} 
-						\renewcommand{\arraystretch}{1.7}
+						\renewcommand{\arraystretch}{1.15}
 					\begin{tabular}[t]{r}
-						\Large\selectfont \textbf{Technologies} \\ \hline 
-						\Large\selectfont React   \\ 
-						\Large\selectfont Javascript \\
-						\Large\selectfont CSS    \\
-						\Large\selectfont HTML
+						\large\selectfont \textbf{Technologies} \\ \hline 
+						\large\selectfont React   \\ 
+						\large\selectfont Javascript \\
+						\large\selectfont CSS    \\
+						\large\selectfont HTML
 					\end{tabular}
 				\end{tabular} 
-					& \renewcommand{\arraystretch}{1.2} \begin{tabular}[t]{ c c }
+					& \renewcommand{\arraystretch}{1.2} \begin{tabular}[t]{ c r }
 						\headerIcon{githubBlack.png}  & \large\selectfont \textbf{[\href{https://github.com/hexaquarks/Particle_Geometry_Simulation}{Source code}]} \\ 
 						\headerIcon{linkBlack.png}  & \large\selectfont \textbf{[\href{https://hexaquarks.github.io/Weather_App/}{Website}]} \\ 
 					\end{tabular}
 			\end{tabular}
 		\end{minipage}
+	\vspace{1cm}
 		\section{Honors \& Awards}
 		\begin{enumerate}[leftmargin=1.8cm]
-				\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \large\selectfont \textbf{Computer Science Excellence Scholarship Award } \\  \emph{By Ministry of Higher Education (April 2021).}
+				\scriptsize\selectfont \item[$\scriptsize \blacksquare$] \Large\selectfont \textbf{Computer Science Excellence Scholarship Award } \\  \emph{By Ministry of Higher Education (April 2021).}
 			\end{enumerate}
 	\end{titlepage}
 	\restoregeometry
